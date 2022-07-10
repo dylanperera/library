@@ -1,0 +1,247 @@
+body{
+    margin: 0px;
+    --mainFont: 'Poppins', sans-serif;
+    font-family: var(--mainFont);
+    --backgroundColor: #f0eef1;
+    --white: rgb(255,255,255);
+    --lightGrey: lightgrey;
+    --appleBlue: #007AFF;
+    --green: #9fff9c;
+    --redDiscard: #ff9c9c;
+    --shadow: rgba(0,0,0,0.16) 0px 1px 4px;
+    --transitionBackground: background 0.25s ease-in-out;
+    background-color: var(--backgroundColor);
+}
+
+.header{
+    padding: 50px;
+    display: flex;
+    justify-content: start;
+    box-shadow: var(--shadow);
+    background-color: var(--white);
+    
+}
+
+.header > div {
+    font-weight: bold;
+    font-size: 50px;
+    font-weight: 700;
+
+}
+
+.header > button {
+    font-size: 25px;
+    margin-left: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family: var(--mainFont);
+    font-weight: 500;
+    border: none;
+    border-radius: 16px;
+    transition: var(--transitionBackground);
+}
+
+.header > button:hover{
+    background-color: var(--lightGrey);
+}
+
+.options {
+    display: flex;
+    justify-content: end;
+    margin: 50px;
+    gap: 25px;
+}
+
+.options>button {
+    font-size: 30px;
+    padding: 20px;
+    font-weight: bold;
+    border-radius: 9px;
+    border: none;
+    background-color: var(--backgroundColor);
+    font-family: var(--mainFont);
+    transition: var(--transitionBackground);
+}
+
+.options>button:hover{
+    background-color: var(--lightGrey);
+}
+
+.options>form{
+    align-self: center;
+    border: none;
+}
+
+.options > form > select {
+    font-size: 20px;
+    border-radius: 8px;
+    font-family: var(--mainFont);
+    border: none;
+}
+
+.options>form>select:active{
+    box-shadow: 0px 0px 20px var(--appleBlue);
+}
+
+.container{
+    display: grid;
+    margin: 100px;
+    margin-top: 20px;
+    --testVar: minmax(500px, 1fr);
+    grid-template-columns: repeat(auto-fit, var(--testVar));
+    gap: 40px;
+}
+
+.card-Color{
+    background-color: #007AFF;
+    height: 350px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    padding-top: 40px;
+}
+
+.card-container{
+    height: 350px;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+
+
+
+.bookTitle{
+   font-weight: bold;
+   font-size: 50px;
+}
+
+.author {
+    font-size: 25px;
+}
+
+.pagesInfo{
+    display: flex;
+    gap: 20px;
+}
+
+.remove{
+    font-family: var(--mainFont);
+    transition: var(--transitionBackground);
+    background-color: var(--backgroundColor);
+    border: none;
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.remove:hover{
+    background-color: lightgrey;
+}
+
+.card-container label{
+    font-size: 17px;
+}
+
+.card-container input{
+    width: 45px;
+    border:none;
+    font-family: var(--mainFont);
+    font-size: 17px;
+}
+
+
+.inputForm{
+    background-color: var(--backgroundColor);
+    padding: 20px;
+    position: absolute;
+    margin: auto;
+    height: 530px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 30px;
+    box-shadow: var(--shadow);
+    
+    /* position the div in center */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+
+}
+
+h1 {
+    align-self: center;
+    margin:0;
+}
+
+
+.inputForm input {
+    height: 40px;
+    width: 400px;
+    border: none;
+    border-radius: 10px;
+    font-family: var(--mainFont);
+    font-size: 20px;
+}
+
+.inputForm label {
+    font-size: 20px;
+}
+
+.inputForm input[type = "number"]
+{
+    width: 100px;
+    font-style: italic;
+}
+
+.buttons{
+    align-self: center;
+    display: flex;
+    gap: 48px;
+}
+
+.inputForm input[type="button"]{
+    width: 150px;
+    font-family: var(--mainFont);
+    font-size: 25px;
+    transition: var(--transitionBackground);
+    font-style: none;
+}
+
+.inputForm input[value="Add"] {
+    background-color: var(--green);
+}
+
+.inputForm input[value="Add"]:hover{
+    background-color: #56aa53;
+}
+
+.inputForm input[value="Discard"] {
+    background-color: var(--redDiscard);
+}
+
+.inputForm input[value="Discard"]:hover {
+    background-color: #d66767;
+}
+
+.inputForm #cardColor {
+    width: 30px;
+    height: 30px;
+    border: none;
+}
+
+.darkenScreen{
+    width: 100vw;
+    height: 100vh;
+    top: 0%;
+    left: 0%;
+    position:absolute;
+    background-color: rgba(94, 90, 90, 0.6);
+}

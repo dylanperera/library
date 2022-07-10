@@ -1,23 +1,128 @@
+//Data Structures:
+
+//1 object for the book type
+//1 object for the library -> should contain the array, the methods to add, remove, etc., books 
+//1 object for the array to store the books
+class Book {
+  constructor(title, author, currentPage, totalPages, color) {
+    this.title = title;
+    this.author = author;
+    this.currentPage = currentPage;
+    this.totalNumPages = totalPages;
+    this.color = color;
+  }
+}
+
+class Library {
+  constructor() {
+    this.library = [];
+  }
+
+  //methods to edit the array
+  addBook(newBook) {
+
+    let bookNotPresent = this.library.find((currentBook) => {
+      if(currentBook.title == newBook.title && currentBook.author == newBook.author){
+        return false;
+      }
+    });
+
+    if(!bookNotPresent){
+      console.log("hello");
+      let container = document.getElementById('container');
+      
+      let cardColor = document.createElement('div');
+      cardColor.classList.add('card-Color');
+      cardColor.style.backgroundColor = newBook.color;
+
+      let cardContainer = document.createElement('div');
+      cardContainer.classList.add('card-container');
+
+      let bookTitle = document.createElement('div');
+      bookTitle.classList.add('bookTitle');
+      bookTitle.textContent = newBook.title;
+
+      let author = document.createElement('div');
+      author.classList.add('author');
+      author.textContent = newBook.author;
+
+      let pagesInfo = document.createElement('div');
+      pagesInfo.classList.add('pagesInfo');
+
+      //Add the current page context
+      let currentPageLabel = document.createElement('label');
+      currentPageLabel.htmlFor = "currentPage";
+      currentPageLabel.textContent = "Current Page:";
+
+      let currentPageInput = document.createElement('input');
+      currentPageInput.id = "currentPage";
+      currentPageInput.value = newBook.currentPage;
+
+      //Add input to parent; label
+      currentPageLabel.appendChild(currentPageInput);
+
+      //Add the total pages context
+      let totalPagesLabel = document.createElement('label');
+      totalPagesLabel.htmlFor = "totalPages";
+      totalPagesLabel.textContent = "Total Pages:";
+
+      let totalPagesInput = document.createElement('input');
+      totalPagesInput.id = "totalPages";
+      totalPagesInput.value = newBook.totalNumPages;
+      
+      //Add input to parent; label
+      totalPagesLabel.appendChild(totalPagesInput);
+
+      //Add pages info to the parent element
+      pagesInfo.appendChild(currentPageLabel);
+      pagesInfo.appendChild(totalPagesLabel);
+
+      //Set up and initiazlie remove button
+      let removeButton = document.createElement('button');
+      removeButton.classList.add('remove');
+      removeButton.textContent = "Remove";
+      removeButton.addEventListener('click', () => {
+        //
+      })
+
+      //Append elements to cardContainer element
+      cardContainer.appendChild(bookTitle);
+      cardContainer.appendChild(author);
+      cardContainer.appendChild(pagesInfo);
+      cardContainer.appendChild(removeButton);
+
+      cardColor.appendChild(cardContainer);
+      container.appendChild(cardColor);
+
+      let form = document.querySelector('body>form');
+
+      closeForm(form);
+
+    }
+
+  }
+
+}
+
+
+
+let inventory = new Library();
+
 main();
 
 function main() {
-  let inventory = [];
-  addBook();
+  addBookButton();
+
 }
 
-function addBook(inventory) {
+
+function addBookButton() {
   let addBookButton = document.querySelector(".options>button");
   addBookButton.addEventListener("click", () => {
-    pauseBackground();
-    newBook(inventory);
+    createForm();
   });
 }
 
-function pauseBackground() {}
-
-function newBook(inventory) {
-  createForm();
-}
 
 //Constructor for the form inputs
 function Input(bookId, inputLabelText, inputPlaceHolder, inputType) {
@@ -72,15 +177,13 @@ function createForm() {
     colorPickerDiv,
     buttonsDiv
   );
-
-  
 }
 
 function addBookTitleElement() {
   let bookTitle = new Input(
     "bookTitle",
     "Book Title:",
-    "  Percy Jackson and the ...",
+    "  Percy Jackson...",
     "text"
   );
   let bookDiv = document.createElement("div");
@@ -98,7 +201,7 @@ function addAuthorElement() {
 }
 
 function addCurrentPageElement() {
-  let currentPage = new Input("currentPage", "Current Page: ", "  0", "number");
+  let currentPage = new Input("currentPageForm", "Current Page: ", "  0", "number");
   let currentPageDiv = document.createElement("div");
   currentPageDiv.appendChild(currentPage.inputLabel);
   currentPageDiv.appendChild(currentPage.inputField);
@@ -107,7 +210,7 @@ function addCurrentPageElement() {
 
 function addTotalPagesElement() {
   let totalNumPages = new Input(
-    "totalPages",
+    "totalPagesForm",
     "Total Pages: ",
     "  989",
     "number"
@@ -135,18 +238,22 @@ function addButtons(form)
   addButton.type = "button";
   addButton.value = "Add";
 
+  addButton.addEventListener('click', () => {
+    let title = document.getElementById('bookTitle').value;
+    let author = document.getElementById('author').value;
+    let currentPage = document.getElementById('currentPageForm').value;
+    let totalPages = document.getElementById('totalPagesForm').value;
+    let color = document.getElementById('cardColor').value
+    let newBook = new Book(title, author, currentPage, totalPages, color);
+    console.log(newBook);
+    inventory.addBook(newBook);
+  })
+
   let discardButton = document.createElement("input");
   discardButton.type = "button";
   discardButton.value = "Discard";
   
-  discardButton.addEventListener('click', () => {
-    let body = document.querySelector('body');
-    body.removeChild(form);
-    let shadeScreen = document.getElementById('darkenScreen');
-    body.removeChild(shadeScreen);
-  });
-
-
+  discardButton.addEventListener('click', () => {closeForm(form)});
 
   let buttonsDiv = document.createElement("div");
   buttonsDiv.classList.add("buttons");
@@ -154,6 +261,15 @@ function addButtons(form)
   buttonsDiv.appendChild(discardButton);
   return buttonsDiv;
 }
+
+function closeForm(form)
+{
+  let body = document.querySelector('body');
+  body.removeChild(form);
+  let shadeScreen = document.getElementById('darkenScreen');
+  body.removeChild(shadeScreen);
+}
+
 
 function appendChildrenToDoc(
   form,
@@ -181,6 +297,15 @@ function appendChildrenToDoc(
   body.appendChild(shadeScreen);
   body.appendChild(form);
 }
+
+
+
+
+
+
+
+
+
 
 function mergeSort(inputArray) {
   let sortedArray;

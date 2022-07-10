@@ -237,7 +237,7 @@ h1 {
     border: none;
 }
 
-.darkenScreen{
+#darkenScreen{
     width: 100vw;
     height: 100vh;
     top: 0%;
